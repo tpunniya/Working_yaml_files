@@ -21,4 +21,3 @@
     - name: Handle Block - SCTASK Status change
       debug:
         msg: "Error occurred while changing the SCTASK status"
-     
