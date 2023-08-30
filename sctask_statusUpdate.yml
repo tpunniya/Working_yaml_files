@@ -1,3 +1,4 @@
+---
 - name: Change SC Task State - mail
   block:
     - name: Change SC Task State 
