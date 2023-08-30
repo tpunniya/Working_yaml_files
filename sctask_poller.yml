@@ -4,13 +4,13 @@
   gather_facts: no
 
   vars:
-    #servicenow_instance: "https://dev110810.service-now.com"
-    #servicenow_user: "admin"
-    #servicenow_password: "wO+LRiiV17*n"
+    servicenow_instance: "https://dev110810.service-now.com"
+    servicenow_user: "admin"
+    servicenow_password: "wO+LRiiV17*n"
 
-    servicenow_instance: "{{ snowurl_test }}"
-    servicenow_user: "{{ snowpass_test }}"
-    servicenow_password: "{{ snowuser_test }}"
+    #servicenow_instance: "{{ snowurl_test }}"
+    #servicenow_user: "{{ snowpass_test }}"
+    #servicenow_password: "{{ snowuser_test }}"
            
     entire_values: []  # Initialize empty list here to hold the API responses
 
