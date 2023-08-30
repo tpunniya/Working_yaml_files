@@ -1,0 +1,7 @@
+---
+- name: Ping Check
+  hosts: your_target_host
+  gather_facts: no
+  tasks:
+    - name: Ping the host
+      ping:
