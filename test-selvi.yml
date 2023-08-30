@@ -1,0 +1,12 @@
+---
+- name: Install apache2 
+  hosts: all
+  remote_user: ubuntu
+  gather_facts: yes 
+
+
+  tasks:
+    - name: Install Apache service 
+      apt:
+        name: apache2
+        state: present 
