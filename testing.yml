@@ -15,4 +15,7 @@
   tasks:
     - name: Print the variable value
       debug:
-        var: servicenow_password
+        var: 
+          -  servicenow_user
+          -  servicenow_instance
+          -  servicenow_password
