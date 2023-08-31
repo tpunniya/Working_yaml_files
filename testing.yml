@@ -1,0 +1,17 @@
+---
+- name: Fetch SC Task Data from ServiceNow
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    #servicenow_instance: "https://dev121241.service-now.com"
+    #servicenow_user: "admin"
+    #servicenow_password: "U+$PZb6ikn3X"
+
+    servicenow_instance: "{{ snowurl_test }}"
+    servicenow_user: "{{ snowpass_test }}"
+    servicenow_password: "{{ snowuser_test }}"
+
+    - name: Print the variable value
+      debug:
+        var: servicenow_password
