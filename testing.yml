@@ -12,6 +12,7 @@
     servicenow_user: "{{ snowpass_test }}"
     servicenow_password: "{{ snowuser_test }}"
 
+  task:
     - name: Print the variable value
       debug:
         var: servicenow_password
