@@ -18,7 +18,7 @@
     - name: Base64 encode credentials
       set_fact:
         encoded_credentials: "{{ (servicenow_user ~ ':' ~ servicenow_password) | b64encode }}"
-      no_log: true
+      #no_log: true
 
     - name: Fetch SC Task - Main
       block:
