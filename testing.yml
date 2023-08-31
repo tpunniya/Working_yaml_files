@@ -9,8 +9,8 @@
     #servicenow_password: "U+$PZb6ikn3X"
 
     servicenow_instance: "{{ snowurl_test }}"
-    servicenow_user: "{{ snowpass_test }}"
-    servicenow_password: "{{ snowuser_test }}"
+    servicenow_user: "{{ snowuser_test }}"
+    servicenow_password: "{{ snowpass_test }}"
 
   tasks:
     - name: Print the variable value
