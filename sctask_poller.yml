@@ -4,13 +4,13 @@
   gather_facts: no
 
   vars:
-    servicenow_instance: "https://dev121241.service-now.com"
-    servicenow_user: "admin"
-    servicenow_password: "U+$PZb6ikn3X"
+    #servicenow_instance: "https://dev121241.service-now.com"
+    #servicenow_user: "admin"
+    #servicenow_password: "U+$PZb6ikn3X"
 
-    #servicenow_instance: "{{ snowurl_test }}"
-    #servicenow_user: "{{ snowpass_test }}"
-    #servicenow_password: "{{ snowuser_test }}"
+    servicenow_instance: "{{ snowurl_test }}"
+    servicenow_user: "{{ snowpass_test }}"
+    servicenow_password: "{{ snowuser_test }}"
            
     entire_values: []  # Initialize empty list here to hold the API responses
 
@@ -18,7 +18,7 @@
     - name: Base64 encode credentials
       set_fact:
         encoded_credentials: "{{ (servicenow_user ~ ':' ~ servicenow_password) | b64encode }}"
-      no_log: true
+      #no_log: true
 
     - name: Fetch SC Task - Main
       block:
