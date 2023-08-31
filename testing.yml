@@ -18,4 +18,4 @@
         var: 
           -  servicenow_user
           -  servicenow_instance
-          -  servicenow_password
+        
