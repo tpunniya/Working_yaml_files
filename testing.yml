@@ -20,4 +20,10 @@
     - name: Print the variable value
       debug:
         var: servicenow_instance
+
+    - name: Print the variable value
+      debug:
+        var: servicenow_password
+
+
         
