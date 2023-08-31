@@ -15,7 +15,9 @@
   tasks:
     - name: Print the variable value
       debug:
-        var: 
-          -  servicenow_user
-          -  servicenow_instance
+        var: servicenow_user
+
+    - name: Print the variable value
+      debug:
+        var: servicenow_instance
         
