@@ -44,5 +44,13 @@
       debug:
         var: query_result1
 
-
+    - name: Execute MySQL Query
+      community.mysql.mysql_query:
+        {{ mysql_credentials | to_nice_json }}
+        query: SELECT * FROM `ci_details` where ci_name LIKE '{{ cmbd_ci }}';
+      register: query_result_CI
+      
+    - name: Debug Query Result
+      debug:
+        var: query_result_CI
 
