@@ -1,0 +1,48 @@
+- name: hitting Data from MySQL
+  hosts: localhost
+  vars:
+    host: "194.195.112.205"
+    cmbd_ci: "ANNIE-IBM"
+  tasks:
+    - name: Execute MySQL Query
+      community.mysql.mysql_query:
+        login_host: "{{ host }}"
+        login_user: "root"
+        login_port: "30517"
+        login_password: "IRONMAN"
+        login_db: taskdata
+        query: "SELECT OS FROM `ci_details` WHERE ci_name LIKE '{{ cmbd_ci }}';"
+      register: query_result
+    - name: Debug Query Result
+      debug:
+        var: query_result
+
+    - name: Debug Query Result1
+      debug:
+        var: query_result.query_result[0][0].OS
+     
+    - name: Extract Value from First Query Result (assuming it's in JSON format)
+      set_fact:
+        extracted_value: "{{ query_result.query_result[0][0].OS }}"
+
+     
+    - name: Debug Extracted Value
+      debug:
+        var: extracted_value  # Replace 'os' with the actual key in your JSON object
+  
+    - name: Execute MySQL Query
+      community.mysql.mysql_query:
+        login_host: "{{ host }}"
+        login_user: "root"
+        login_port: "30517"
+        login_password: "IRONMAN"
+        login_db: taskdata
+        query: "SELECT * FROM `credId` where OS LIKE '{{ extracted_value }}';"
+      register: query_result1
+      
+    - name: Debug Query Result
+      debug:
+        var: query_result1
+
+
+
