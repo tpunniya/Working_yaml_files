@@ -72,7 +72,7 @@
           loop: "{{ entire_values }}"
           loop_control:
             loop_var: item1
-          include_tasks: sc_task_status_update.yml
+          include_tasks: sctask_statusUpdate.yml
           vars:
             api_encoded_credentials1: "{{ encoded_credentials }}"
             item1: "{{ item1 }}"
