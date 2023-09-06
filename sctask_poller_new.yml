@@ -143,11 +143,11 @@
         - name: Connect DB and get ci details
           loop: "{{ entire_values }}"
           loop_control:
-            loop_var: item
+            loop_var: item1
           include_tasks: cmdbci_db.yml
           vars:
             cmdb_ci: "{{ sctask_data.cmdb_ci.value }}"
-            item: "{{ item }}"
+            item: "{{ item1 }}"
 
       rescue:
         - name: Connect DB and get ci details
