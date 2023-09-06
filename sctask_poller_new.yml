@@ -54,7 +54,7 @@
           loop: "{{ filtered_sctasks }}"
           loop_control:
             loop_var: item
-          include_tasks: get_api_responses.yml
+          include_tasks: get_api_response.yml
           vars:
             api_encoded_credentials: "{{ encoded_credentials }}"
             item: "{{ item }}"
