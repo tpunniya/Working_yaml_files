@@ -14,7 +14,6 @@
     - name: Execute MySQL Query
       community.mysql.mysql_query:
         {{ mysql_credentials | to_nice_json }}
-        
         query: "SELECT OS FROM `ci_details` WHERE ci_name LIKE '{{ cmbd_ci }}';"
       register: query_result
     - name: Debug Query Result
@@ -28,7 +27,6 @@
     - name: Extract Value from First Query Result (assuming it's in JSON format)
       set_fact:
         extracted_value: "{{ query_result.query_result[0][0].OS }}"
-
      
     - name: Debug Extracted Value
       debug:
