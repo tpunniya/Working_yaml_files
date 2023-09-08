@@ -1,5 +1,7 @@
 ---
 - name: hitting Data from MySQL
+  hosts: localhost
+  gather_facts: no
   vars:
     dbhost: "194.195.112.205"
     cmbd_ci: "ANNIE-IBM"
