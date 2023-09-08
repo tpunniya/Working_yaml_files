@@ -51,4 +51,3 @@
     - name: Debug Query Result
       debug:
         var: query_result_CI
-
