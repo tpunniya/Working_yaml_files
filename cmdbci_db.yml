@@ -13,7 +13,11 @@
   tasks:
     - name: Execute MySQL Query
       community.mysql.mysql_query:
-        {{ mysql_credentials | to_nice_json }}
+        login_host: "{{ mysql_credentials.login_host }}"
+        login_user: "{{ mysql_credentials.login_user }}"
+        login_port: "{{ mysql_credentials.login_port }}"
+        login_password: "{{ mysql_credentials.login_password }}"
+        login_db: "{{ mysql_credentials.login_db }}"
         query: "SELECT OS FROM `ci_details` WHERE ci_name LIKE '{{ cmbd_ci }}';"
       register: query_result
     - name: Debug Query Result
@@ -34,7 +38,11 @@
   
     - name: Execute MySQL Query
       community.mysql.mysql_query:
-        {{ mysql_credentials | to_nice_json }}
+        login_host: "{{ mysql_credentials.login_host }}"
+        login_user: "{{ mysql_credentials.login_user }}"
+        login_port: "{{ mysql_credentials.login_port }}"
+        login_password: "{{ mysql_credentials.login_password }}"
+        login_db: "{{ mysql_credentials.login_db }}"
         query: "SELECT * FROM `credId` where OS LIKE '{{ extracted_value }}';"
       register: query_result1
       
@@ -44,7 +52,11 @@
 
     - name: Execute MySQL Query
       community.mysql.mysql_query:
-        {{ mysql_credentials | to_nice_json }}
+        login_host: "{{ mysql_credentials.login_host }}"
+        login_user: "{{ mysql_credentials.login_user }}"
+        login_port: "{{ mysql_credentials.login_port }}"
+        login_password: "{{ mysql_credentials.login_password }}"
+        login_db: "{{ mysql_credentials.login_db }}"
         query: SELECT * FROM `ci_details` where ci_name LIKE '{{ cmbd_ci }}';
       register: query_result_CI
       
