@@ -1,3 +1,4 @@
+---
 - name: hitting Data from MySQL
   hosts: localhost
   vars:
