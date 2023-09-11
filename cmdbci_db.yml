@@ -1,5 +1,4 @@
 - name: hitting Data from MySQL
-  hosts: localhost
   vars:
     host: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
     cmbd_ci: "ANNIE-IBM"
@@ -10,56 +9,56 @@
         login_password: "ansible123"
         login_db: "taskdata"
   
-  tasks:
-    - name: Execute MySQL Query
-      community.mysql.mysql_query:
-        login_host: "{{ mysql_credentials.login_host }}"
-        login_user: "{{ mysql_credentials.login_user }}"
-        login_port: "{{ mysql_credentials.login_port }}"
-        login_password: "{{ mysql_credentials.login_password }}"
-        login_db: "{{ mysql_credentials.login_db }}"
-        query: "SELECT OS FROM `ci_details` WHERE ci_name LIKE '{{ cmbd_ci }}';"
-      register: query_result
-    - name: Debug Query Result
-      debug:
-        var: query_result
 
-    - name: Debug Query Result1
-      debug:
-        var: query_result.query_result[0][0].OS
+- name: Execute MySQL Query
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: "SELECT OS FROM `ci_details` WHERE ci_name LIKE '{{ cmbd_ci }}';"
+  register: query_result
+- name: Debug Query Result
+  debug:
+    var: query_result
+
+- name: Debug Query Result1
+  debug:
+     var: query_result.query_result[0][0].OS
      
-    - name: Extract Value from First Query Result (assuming it's in JSON format)
-      set_fact:
-        extracted_value: "{{ query_result.query_result[0][0].OS }}"
+- name: Extract Value from First Query Result (assuming it's in JSON format)
+  set_fact:
+    extracted_value: "{{ query_result.query_result[0][0].OS }}"
      
-    - name: Debug Extracted Value
-      debug:
-        var: extracted_value  # Replace 'os' with the actual key in your JSON object
+- name: Debug Extracted Value
+  debug:
+    var: extracted_value  # Replace 'os' with the actual key in your JSON object
   
-    - name: Execute MySQL Query
-      community.mysql.mysql_query:
-        login_host: "{{ mysql_credentials.login_host }}"
-        login_user: "{{ mysql_credentials.login_user }}"
-        login_port: "{{ mysql_credentials.login_port }}"
-        login_password: "{{ mysql_credentials.login_password }}"
-        login_db: "{{ mysql_credentials.login_db }}"
-        query: "SELECT * FROM `credId` where OS LIKE '{{ extracted_value }}';"
-      register: query_result1
+- name: Execute MySQL Query
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: "SELECT * FROM `credId` where OS LIKE '{{ extracted_value }}';"
+  register: query_result1
       
-    - name: Debug Query Result
-      debug:
-        var: query_result1
+- name: Debug Query Result
+  debug:
+    var: query_result1
 
-    - name: Execute MySQL Query
-      community.mysql.mysql_query:
-        login_host: "{{ mysql_credentials.login_host }}"
-        login_user: "{{ mysql_credentials.login_user }}"
-        login_port: "{{ mysql_credentials.login_port }}"
-        login_password: "{{ mysql_credentials.login_password }}"
-        login_db: "{{ mysql_credentials.login_db }}"
-        query: SELECT * FROM `ci_details` where ci_name LIKE '{{ cmbd_ci }}';
-      register: query_result_CI
+- name: Execute MySQL Query
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: SELECT * FROM `ci_details` where ci_name LIKE '{{ cmbd_ci }}';
+  register: query_result_CI
       
-    - name: Debug Query Result
-      debug:
-        var: query_result_CI
+- name: Debug Query Result
+  debug:
+    var: query_result_CI
