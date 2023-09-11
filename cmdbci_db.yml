@@ -64,8 +64,9 @@
   set_fact:
     desired_output:
       cat_item_value: "{{ merged_query_result.item_request_item_response.cat_item_value }}"
+      RITM: "{{ merged_query_result.item_request_item_response.RITM }}"
       requestedfor_req: "{{ merged_query_result.item_request_response.requestedfor_req }}"
-      ritm: "{{ merged_query_result.item_request_response.ritm }}"
+      REQ: "{{ merged_query_result.item_request_response.REQ }}"
       ci_name: "{{ merged_query_result.query_result[0][0].ci_name }}"
       dns_domain: "{{ merged_query_result.query_result[0][0].dns_domain }}"
       fqdn: "{{ merged_query_result.query_result[0][0].fqdn }}"
