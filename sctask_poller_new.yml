@@ -126,10 +126,6 @@
       delegate_to: localhost
       delegate_facts: yes
       register: filtered_data_loop
-
-    - name: Debug item structure
-      debug:
-        var: item
     
     - set_fact:
         filtered_data: "{{ filtered_data + [{
@@ -143,6 +139,7 @@
             'requestedfor_req': item.item_request_response.requested_for.value
         }] }}"
       loop: "{{ filtered_data_loop.results }}"
+
 
     - name: Debug Variables
       debug:
