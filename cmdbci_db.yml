@@ -1,13 +1,15 @@
-- name: hitting Data from MySQL
+- name: Define host variable
   set_fact:
     host: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
-    cmbd_ci: "ANNIE-IBM"
-    mysql_credentials:
-        login_host: "{{ host }}"
-        login_user: "admin"
-        login_port: "3306"
-        login_password: "ansible123"
-        login_db: "taskdata"
+
+- name: Set database connection variables
+  set_fact:
+    db_credentials:
+      login_host: "{{ host }}"
+      login_user: "admin"
+      login_port: "3306"
+      login_password: "ansible123"
+      login_db: "taskdata"
   
 
 - name: Execute MySQL Query
