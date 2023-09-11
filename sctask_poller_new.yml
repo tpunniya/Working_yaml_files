@@ -126,6 +126,10 @@
       delegate_to: localhost
       delegate_facts: yes
       register: filtered_data_loop
+
+    - name: Debug Variablesfiltered_data_loop
+      debug:
+        var: filtered_data_loop
     
     - set_fact:
         filtered_data: "{{ filtered_data + [{
