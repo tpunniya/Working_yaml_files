@@ -58,7 +58,7 @@
     #var: query_result_CI
 - name: Merge Query Results
   set_fact:
-    merged_query_result: "{{ item }} + {{query_result1)}} + {{query_result_CI }}"
+    merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) }}"
 
 - name: Debug Merged Query Result
   debug:
