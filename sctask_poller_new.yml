@@ -142,6 +142,8 @@
       debug:
         var: filtered_data
 
+    
+
 
     - name: Connect DB and get ci details
       block:
@@ -151,7 +153,14 @@
             loop_var: item1
           include_tasks: cmdbci_db.yml
           vars:
+            dbhost: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
             cmdb_ci: "{{ sctask_data.cmdb_ci.value }}"
+            mysql_credentials:
+                login_host: "{{ dbhost }}"
+                login_user: "admin"
+                login_port: "3306"
+                login_password: "ansible123"
+                login_db: "taskdata"
             item: "{{ item1 }}"
 
       rescue:
