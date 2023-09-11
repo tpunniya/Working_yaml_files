@@ -8,6 +8,11 @@
     login_db: "{{ mysql_credentials.login_db }}"
     query: "SELECT OS FROM `ci_details` WHERE ci_name LIKE '{{ cmdb_ci }}';"
   register: query_result
+
+- name: Debug Query Result
+  debug:
+    var: filtered_data.sctask_data.cmdb_ci
+    
 - name: Debug Query Result
   debug:
     var: query_result
@@ -34,9 +39,9 @@
     query: "SELECT * FROM `credId` where OS LIKE '{{ extracted_value }}';"
   register: query_result1
       
-- name: Debug Query Result
-  debug:
-    var: query_result1
+#- name: Debug Query Result
+  #debug:
+    #var: query_result1
 
 - name: Execute MySQL Query
   community.mysql.mysql_query:
@@ -48,6 +53,13 @@
     query: SELECT * FROM `ci_details` where ci_name LIKE '{{ cmdb_ci }}';
   register: query_result_CI
       
-- name: Debug Query Result
+#- name: Debug Query Result
+  #debug:
+    #var: query_result_CI
+- name: Merge Query Results
+  set_fact:
+    merged_query_result: "{{ item | combine(query_result1) | combine(query_result_CI) }}"
+
+- name: Debug Merged Query Result
   debug:
-    var: query_result_CI
+    var: merged_query_result
