@@ -1,13 +1,13 @@
 - name: hitting Data from MySQL
   hosts: localhost
   vars:
-    host: "194.195.112.205"
+    host: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
     cmbd_ci: "ANNIE-IBM"
     mysql_credentials:
         login_host: "{{ host }}"
-        login_user: "root"
-        login_port: "30517"
-        login_password: "IRONMAN"
+        login_user: "admin"
+        login_port: "3306"
+        login_password: "ansible123"
         login_db: "taskdata"
   
   tasks:
