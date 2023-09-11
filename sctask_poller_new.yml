@@ -110,6 +110,27 @@
     - name: Initialize filtered_data as an empty list
       set_fact:
         filtered_data: []
+    - name: Add selected fields to filtered_data
+      set_fact:
+        filtered_data_item:
+          sctask_data:
+            opened_at: "{{ item3.sctask_data.opened_at }}"
+            cmdb_ci: "{{ item3.sctask_data.cmdb_ci.value if item3.sctask_data.cmdb_ci is defined else 'Attribute not found' }}"
+            short_description: "{{ item3.sctask_data.short_description }}"
+            state: "{{ item3.sctask_data.state }}"
+            sys_id: "{{ item3.sctask_data.sys_id }}"
+          item_request_item_response:
+            cat_item_value: "{{ item3.item_request_item_response.cat_item.value if item3.item_request_item_response.cat_item is defined else 'Attribute not found' }}"
+          item_request_response:
+            ritm: "{{ item3.item_request_response.number.value if item3.item_request_response.number is defined else 'Attribute not found' }}"
+            requestedfor_req: "{{ item3.item_request_response.requested_for.value if item3.item_request_response.requested_for is defined else 'Attribute not found' }}"
+      loop: "{{ entire_values }}"
+      loop_control:
+        loop_var: item3
+    
+    - name: Append to filtered_data list
+      set_fact:
+        filtered_data: "{{ filtered_data + [filtered_data_item] }}"
 
     - name: Iterate through entire_values
       loop: "{{ entire_values }}"
@@ -117,29 +138,7 @@
         sctask_data: "{{ item.sctask_data }}"
         item_request_item_response: "{{ item.item_request_item_response }}"
         item_request_response: "{{ item.item_request_response }}"
-        
-    - name: Add selected fields to filtered_data
-      loop: "{{ entire_values }}"
-      loop_control:
-            loop_var: item3
-      set_fact:
-        filtered_data: "{{ filtered_data + [{
-          'sctask_data': {
-            'opened_at': item3.sctask_data.opened_at,
-            'cmdb_ci': (item3.sctask_data.cmdb_ci.value if item3.sctask_data.cmdb_ci else 'Attribute not found'),
-            'short_description': item3.sctask_data.short_description,
-            'state': item3.sctask_data.state,
-            'sys_id': item3.sctask_data.sys_id,
-          },
-          'item_request_item_response': {
-            'cat_item_value': (item3.item_request_item_response.cat_item.value if item3.item_request_item_response.cat_item else 'Attribute not found')
-          },
-          'item_request_response': {
-            'ritm': (item3.item_request_response.number.value if item3.item_request_response.number else 'Attribute not found'),
-            'requestedfor_req': (item3.item_request_response.requested_for.value if item3.item_request_response.requested_for else 'Attribute not found')
-          }
-        }] }}"
-      
+
     - name: Debug Variables
       debug:
         var: filtered_data
