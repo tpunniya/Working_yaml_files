@@ -1,17 +1,4 @@
-- name: Define host variable
-  set_fact:
-    dbhost: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
-
-- name: Set database connection variables
-  set_fact:
-    db_credentials:
-      login_host: "{{ dbhost }}"
-      login_user: "admin"
-      login_port: "3306"
-      login_password: "ansible123"
-      login_db: "taskdata"
-  
-
+---
 - name: Execute MySQL Query
   community.mysql.mysql_query:
     login_host: "{{ mysql_credentials.login_host }}"
