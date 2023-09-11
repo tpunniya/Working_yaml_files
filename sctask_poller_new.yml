@@ -122,18 +122,18 @@
       set_fact:
         filtered_data: "{{ filtered_data + [{
           'sctask_data': {
-            'opened_at': sctask_data.opened_at,
-            'cmdb_ci': sctask_data.cmdb_ci.value,
-            'short_description': sctask_data.short_description,
-            'state': sctask_data.state,
-            'sys_id': sctask_data.sys_id,
+            'opened_at': item.sctask_data.opened_at,
+            'cmdb_ci': item.sctask_data.cmdb_ci.value,
+            'short_description': item.sctask_data.short_description,
+            'state': item.sctask_data.state,
+            'sys_id': item.sctask_data.sys_id,
           },
           'item_request_item_response': {
-            'cat_item_value': item_request_item_response.cat_item.value
+            'cat_item_value': item.item_request_item_response.cat_item.value
           },
           'item_request_response': {
-            'ritm': item_request_response.number,
-            'requestedfor_req': item_request_response.requested_for.value
+            'ritm': item.item_request_response.number,
+            'requestedfor_req': item.item_request_response.requested_for.value
           }
         }] }}"
       loop: "{{ entire_values }}"
