@@ -133,7 +133,7 @@
             'RITM':(item.item_request_item_response.number | default('Attribute not found'))
           },
           'item_request_response': {
-            'REQ': (item.item_request_response.number.value | default('Attribute not found')),
+            'REQ': (item.item_request_response.number | default('Attribute not found')),
             'requestedfor_req': (item.item_request_response.requested_for.value | default('Attribute not found'))
           }
         }] }}"
@@ -148,7 +148,7 @@
     - name: Connect DB and get ci details
       block:
         - name: Connect DB and get ci details
-          loop: "{{ entire_values }}"
+          loop: "{{ filtered_data }}"
           loop_control:
             loop_var: item1
           include_tasks: cmdbci_db.yml
@@ -161,7 +161,7 @@
                 login_port: "3306"
                 login_password: "ansible123"
                 login_db: "taskdata"
-            item: "{{ filtered_data }}"
+            item: "{{ item1 }}"
 
       rescue:
         - name: Connect DB and get ci details
