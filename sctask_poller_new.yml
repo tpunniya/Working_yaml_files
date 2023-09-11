@@ -122,7 +122,7 @@
             'RITM':(item3.item_request_item_response.number | default('Attribute not found'))
           },
           'item_request_response': {
-            'ritm': (item3.item_request_response.number | default('Attribute not found')),
+            'REQ': (item3.item_request_response.number | default('Attribute not found')),
             'requestedfor_req': (item3.item_request_response.requested_for.value | default('Attribute not found'))
           }
         } }}"
