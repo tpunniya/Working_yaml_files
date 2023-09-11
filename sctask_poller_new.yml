@@ -126,17 +126,17 @@
         filtered_data: "{{ filtered_data + [{
           'sctask_data': {
             'opened_at': item3.sctask_data.opened_at,
-            'cmdb_ci': item3.sctask_data.cmdb_ci.value | default({'value': 'Attribute not found'}).value,
+            'cmdb_ci': (item3.sctask_data.cmdb_ci.value if item3.sctask_data.cmdb_ci else 'Attribute not found'),
             'short_description': item3.sctask_data.short_description,
             'state': item3.sctask_data.state,
             'sys_id': item3.sctask_data.sys_id,
           },
           'item_request_item_response': {
-            'cat_item_value': item3.item_request_item_response.cat_item.value | default({'value': 'Attribute not found'}).value
+            'cat_item_value': (item3.item_request_item_response.cat_item.value if item3.item_request_item_response.cat_item else 'Attribute not found')
           },
           'item_request_response': {
-            'ritm': item3.item_request_response.number | default({'value': 'Attribute not found'}).value,
-            'requestedfor_req': item3.item_request_response.requested_for.value | default({'value': 'Attribute not found'}).value
+            'ritm': (item3.item_request_response.number.value if item3.item_request_response.number else 'Attribute not found'),
+            'requestedfor_req': (item3.item_request_response.requested_for.value if item3.item_request_response.requested_for else 'Attribute not found')
           }
         }] }}"
       
