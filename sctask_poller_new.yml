@@ -118,10 +118,11 @@
             'sys_id': item3.sctask_data.sys_id
           },
           'item_request_item_response': {
-            'cat_item_value': (item3.item_request_item_response.cat_item.value | default('Attribute not found'))
+            'cat_item_value': (item3.item_request_item_response.cat_item.value | default('Attribute not found')),
+            'RITM':(item3.item_request_item_response.number | default('Attribute not found'))
           },
           'item_request_response': {
-            'ritm': (item3.item_request_response.number.value | default('Attribute not found')),
+            'ritm': (item3.item_request_response.number | default('Attribute not found')),
             'requestedfor_req': (item3.item_request_response.requested_for.value | default('Attribute not found'))
           }
         } }}"
