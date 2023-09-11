@@ -134,7 +134,7 @@
             'short_description': item.sctask_data.short_description,
             'state': item.sctask_data.state,
             'sys_id': item.sctask_data.sys_id,
-            'cat_item_value': item.item_request_item_response.cat_item.value
+            'cat_item_value': item.item_request_item_response.cat_item.value,
             'ritm': item.item_request_response.number,
             'requestedfor_req': item.item_request_response.requested_for.value
         }] }}"
