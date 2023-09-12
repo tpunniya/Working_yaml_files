@@ -124,7 +124,7 @@
           'sctask_data': {
             'opened_at': item.sctask_data.opened_at,
             'cmdb_ci': (item.sctask_data.cmdb_ci.value | default('Attribute not found')),
-            'cmdb_ci_name': (item.cmdb_ci_name.value | default('Attribute not found')),
+            'cmdb_ci_name': (item.cmdb_ci_name | default('Attribute not found')),
             'short_description': item.sctask_data.short_description,
             'state': item.sctask_data.state,
             'sys_id': item.sctask_data.sys_id
