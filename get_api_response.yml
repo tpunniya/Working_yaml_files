@@ -28,7 +28,7 @@
       Authorization: "Basic {{ api_encoded_credentials }}"
     return_content: yes
   when: item.cmdb_ci.link is defined and item.cmdb_ci.link != ''
-  register: item_cmdb_ci_name
+  register: item_cmdb_ci_name.result.name
 
 - name: Add API responses to entire values
   set_fact:
