@@ -155,7 +155,6 @@
           vars:
             dbhost: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
             cmdb_ci: "ANNIE-IBM"
-            server1: item1.sctask_data.cmdb_ci.value
             mysql_credentials:
                 login_host: "{{ dbhost }}"
                 login_user: "admin"
