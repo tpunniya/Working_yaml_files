@@ -19,7 +19,7 @@
     return_content: yes
   register: item_request_response
 
-  - name: Make API call for item.request.link
+- name: Make API call for item.requestfor.link
   uri:
     url: "{{ item.requested_for.link }}"
     method: GET
@@ -29,7 +29,7 @@
     return_content: yes
   register: item_requested_for
 
-  - name: Make API call for item.request.link
+- name: Make API call for item.cmdb.link
   uri:
     url: "{{ item.cmdb_ci.link }}"
     method: GET
