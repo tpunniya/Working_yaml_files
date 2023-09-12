@@ -21,13 +21,13 @@
 
 - name: Make API call for item.requestfor.link
   uri:
-    url: "{{ item.requested_for.link }}"
+    url: "{{ item.assigned_to.link }}"
     method: GET
     headers:
       Accept: "application/json"
       Authorization: "Basic {{ api_encoded_credentials }}"
     return_content: yes
-  register: item_requested_for
+  register: item_assigned_to
 
 - name: Make API call for item.cmdb.link
   uri:
@@ -41,4 +41,4 @@
 
 - name: Add API responses to entire values
   set_fact:
-    entire_values: "{{ entire_values + [{'sctask_data': item, 'item_request_item_response': item_request_item_response.json.result, 'item_request_response': item_request_response.json.result,'cmdb_ci_name':item_cmdb_ci_name.result,'requested_for':item_requested_for.result}] }}"
+    entire_values: "{{ entire_values + [{'sctask_data': item, 'item_request_item_response': item_request_item_response.json.result, 'item_request_response': item_request_response.json.result,'cmdb_ci_name':item_cmdb_ci_name.result,'assigned_to':item_assigned_to.result}] }}"
