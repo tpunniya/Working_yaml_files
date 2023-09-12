@@ -11,7 +11,7 @@
 
 - name: Debug Query Result
   debug:
-    var: item.item.sctask_data.cmdb_ci.value
+    var: sctask_data.cmdb_ci.value
     
 - name: Debug Query Result
   debug:
