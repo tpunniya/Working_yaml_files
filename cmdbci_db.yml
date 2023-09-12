@@ -11,7 +11,7 @@
 
 - name: Debug Query Result
   debug:
-    var: item.sctask_data.cmdb_ci
+    var: item.filtered_data.sctask_data.cmdb_ci
     
 - name: Debug Query Result
   debug:
