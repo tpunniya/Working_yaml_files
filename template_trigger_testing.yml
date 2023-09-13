@@ -1,0 +1,17 @@
+---
+- name: Launch Ansible Tower Job Template
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Launch Job Template
+      tower_job_launch:
+        tower_host: "35.154.24.128"  # Replace with your Ansible Tower URL
+        tower_username: "selvi"         # Replace with your Ansible Tower username
+        tower_password: "selvi"         # Replace with your Ansible Tower password
+        job_template: "install-selvi"  # Replace with the name of your job template
+        credentials: "snowcred_selvi"     # Replace with the name of the credential created in step 2
+      register: job_result
+
+    - name: Display Job Result
+      debug:
+        var: job_result
