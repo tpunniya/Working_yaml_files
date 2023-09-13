@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Launch Job Template
-      ansible.builtin.tower_job_launch:
+      awx.awx.job_launch:
         tower_host: "35.154.24.128"  # Replace with your Ansible Tower URL
         tower_username: "selvi"         # Replace with your Ansible Tower username
         tower_password: "selvi"         # Replace with your Ansible Tower password
