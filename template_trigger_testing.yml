@@ -1,5 +1,5 @@
 - name: Launch AAP Job Template
-  awx.awx.job_launch:
+  awx.awx.awx_job_launch:
     tower_host: 35.154.24.128
     tower_username: selvi
     tower_password: selvi
@@ -14,7 +14,7 @@
 
 
 - name: Wait for Job Completion
-  awx.awx.job_wait:
+  awx.awx.awx.job_wait:
     tower_host: 35.154.24.128
     tower_username: selvi
     tower_password: selvi
