@@ -1,33 +1,28 @@
 ---
-- name: Fetch SC Task Data from ServiceNow
-  hosts: localhost
-  gather_facts: no
-
-  tasks:
-    - name: Launch Ansible Tower Job Template
-      awx.awx.job_launch:
-        tower_host: "35.154.24.128"
-        tower_username: "selvi"
-        tower_password: "selvi"
-        validate_certs: "False" 
-        job_template: "install-selvi"
-        credentials: "snowcred_selvi"
-      register: job_launch_result
+- name: Launch Ansible Tower Job Template
+  awx.awx.job_launch:
+    tower_host: "35.154.24.128"
+    tower_username: "selvi"
+    tower_password: "selvi"
+    validate_certs: "False" 
+    job_template: "install-selvi"
+    credentials: "snowcred_selvi"
+  register: job_launch_result
       
-    - name: Display Job Details
-      debug:
-        var: job_launch_result
+- name: Display Job Details
+  debug:
+    var: job_launch_result
     
-    - name: Wait for Job Completion
-      awx.awx.job_wait:
-        tower_host: "35.154.24.128"
-        tower_username: "selvi"
-        tower_password: "selvi"
-        validate_certs: "False" 
-        job_id: "{{ job_launch_result.id }}"
-      register: job_wait_result
+- name: Wait for Job Completion
+  awx.awx.job_wait:
+    tower_host: "35.154.24.128"
+    tower_username: "selvi"
+    tower_password: "selvi"
+    validate_certs: "False" 
+    job_id: "{{ job_launch_result.id }}"
+    registe: job_wait_result
     
     
-    - name: Display Job Details
-      debug:
-        var: job_wait_result
+- name: Display Job Details
+  debug:
+    var: job_wait_result
