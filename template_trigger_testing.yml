@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Launch Job Template
-      tower_job_launch:
+      awx.awx.job_launch:
         tower_host: "35.154.24.128"
         tower_username: "selvi"
         tower_password: "selvi"
