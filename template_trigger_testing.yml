@@ -6,7 +6,6 @@
     tower_password: "selvi"
     validate_certs: "False" 
     job_template: "install-selvi"
-    credentials: "snowcred_selvi"
   register: job_launch_result
       
 - name: Display Job Details
