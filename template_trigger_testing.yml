@@ -10,8 +10,6 @@
         tower_password: "selvi"
         validate_certs: False 
         job_template: "install-selvi"
-        extra_vars:
-          credential_name: "MyCredential"
       register: job_launch_result
 
     - name: Display Job Launch Result
