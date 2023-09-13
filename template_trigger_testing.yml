@@ -4,14 +4,15 @@
   gather_facts: no
   tasks:
     - name: Launch Job Template
-      awx.awx.awx_job_launch:
+      tower_job_launch:
         tower_host: "35.154.24.128"
         tower_username: "selvi"
         tower_password: "selvi"
-        validate_certs: false
         job_template: "install-selvi"
+        extra_vars:
+          credential_name: "MyCredential"
       register: job_launch_result
-      
-    - name: Display Job Details
+
+    - name: Display Job Launch Result
       debug:
         var: job_launch_result
