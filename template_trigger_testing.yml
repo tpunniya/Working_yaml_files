@@ -8,6 +8,7 @@
         tower_host: "35.154.24.128"
         tower_username: "selvi"
         tower_password: "selvi"
+        validate_certs: False 
         job_template: "install-selvi"
         extra_vars:
           credential_name: "MyCredential"
