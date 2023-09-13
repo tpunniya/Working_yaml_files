@@ -1,28 +1,17 @@
-- name: Launch AAP Job Template
-  awx.awx.awx_job_launch:
-    tower_host: 35.154.24.128
-    tower_username: selvi
-    tower_password: selvi
-    validate_certs: False  # Set to True if you want to validate SSL certificates
-    job_template: install-selvi
-    credentials:
-      - "4"
-    extra_vars:
-      food: grape
-      animal: owl
-  register: job_launch_result
-
-
-- name: Wait for Job Completion
-  awx.awx.awx.job_wait:
-    tower_host: 35.154.24.128
-    tower_username: selvi
-    tower_password: selvi
-    validate_certs: False  # Set to True if you want to validate SSL certificates
-    job_id: "{{ job_launch_result.id }}"
-  register: job_wait_result
-
-
-- name: Display Job Details
-  debug:
-    var: job_wait_result
+---
+- name: Launch Ansible Tower Job Template
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Launch Job Template
+      awx.awx.awx_job_launch:
+        tower_host: "35.154.24.128"
+        tower_username: "selvi"
+        tower_password: "selvi"
+        validate_certs: false
+        job_template: "install-selvi"
+      register: job_launch_result
+      
+    - name: Display Job Details
+      debug:
+        var: job_launch_result
