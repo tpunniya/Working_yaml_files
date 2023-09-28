@@ -39,9 +39,9 @@
     query: "SELECT * FROM `credId` where OS LIKE '{{ extracted_value }}';"
   register: query_result1
       
-#- name: Debug Query Result
-  #debug:
-    #var: query_result1
+- name: Debug Query Result
+  debug:
+    var: query_result1
 
 - name: Execute MySQL Query to fetch ci
   community.mysql.mysql_query:
@@ -63,9 +63,13 @@
     query: SELECT * FROM `usecase_templatedetails` where usecaseName LIKE '{{ item.sctask_data.short_description }}';
   register: query_result_usecasetemplate
   
-#- name: Debug Query Result
-  #debug:
-    #var: query_result_CI
+- name: Debug Query Result_ci
+  debug:
+    var: query_result_CI
+- name: Debug Query Result_usecasetemplate
+  debug:
+    var: query_result_usecasetemplate
+
 - name: Merge Query Results
   set_fact:
     merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) | combine(query_result_usecasetemplate) }}"
