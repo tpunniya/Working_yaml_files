@@ -15,16 +15,16 @@
           ansible.builtin.debug:
             var: current_set
 
-        - name: Iterate over JSON objects in current_set and trigger job templates
-          awx.awx.job_launch:
-            tower_host: "35.154.24.128"
-            tower_username: "selvi"
-            tower_password: "selvi"
-            validate_certs: False
-            job_template: "{{ item.usecase_template }}"
-            extra_vars:
-              task_data: "{{ item | to_json }}"
-          with_items: "{{ current_set }}"
-          loop_control:
-            loop_var: item
-      when: current_set is iterable
+    - name: Iterate over JSON objects in current_set and trigger job templates
+      awx.awx.job_launch:
+        tower_host: "35.154.24.128"
+        tower_username: "selvi"
+        tower_password: "selvi"
+        validate_certs: False
+        job_template: "{{ item.usecase_template }}"
+        extra_vars:
+          task_data: "{{ item | to_json }}"
+      with_items: "{{ current_set }}"
+      loop_control:
+        loop_var: item
+  when: current_set is iterable
