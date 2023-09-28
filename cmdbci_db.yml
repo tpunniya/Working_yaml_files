@@ -66,13 +66,20 @@
 - name: Debug Query Result_ci
   debug:
     var: query_result_CI
+
 - name: Debug Query Result_usecasetemplate
   debug:
     var: query_result_usecasetemplate
 
+
 - name: Merge Query Results
   set_fact:
-    merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) | combine(query_result_usecasetemplate) }}"
+    merged_query_result: "{{ merged_query_result | default({}) | item | combine({'query_result': query_result}) | combine({'query_result_CI': query_result_CI}) | combine({'query_result_usecasetemplate': query_result_usecasetemplate}) }}"
+
+
+#- name: Merge Query Results
+  #set_fact:
+    #merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) | combine(query_result_usecasetemplate) }}"
 
 - name: Debug merged_query_result
   debug:
