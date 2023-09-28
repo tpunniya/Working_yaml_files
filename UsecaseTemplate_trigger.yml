@@ -1,17 +1,28 @@
 ---
-- name: Launch Ansible Tower Job Template
+- name: Launch Ansible Tower Job Templates Dynamically
   hosts: localhost
   gather_facts: no
   tasks:
-    - name: Launch Job Template
-      awx.awx.job_launch:
-        tower_host: "35.154.24.128"
-        tower_username: "selvi"
-        tower_password: "selvi"
-        validate_certs: False 
-        job_template: "taskpoller_job"
-      register: job_launch_result
+    - name: Divide filtered_sctasks into sets of 10 items
+      set_fact:
+        task_sets: "{{ desired_output | batch(10) }}"
+        
+    - name: Trigger job templates in parallel for each set
+      block:
+        - name: Display task details
+          ansible.builtin.debug:
+            var: current_set
 
-    - name: Display Job Launch Result
-      debug:
-        var: job_launch_result
+        - name: Iterate over JSON objects in current_set and trigger job templates
+          awx.awx.job_launch:
+            tower_host: "35.154.24.128"
+            tower_username: "selvi"
+            tower_password: "selvi"
+            validate_certs: False
+            job_template: "{{ item.template_name }}"
+            extra_vars:
+              task_data: "{{ item | to_json }}"
+          with_items: "{{ current_set }}"
+          loop_control:
+            loop_var: item
+      when: current_set is iterable
