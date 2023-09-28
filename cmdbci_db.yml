@@ -73,6 +73,10 @@
 - name: Merge Query Results
   set_fact:
     merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) | combine(query_result_usecasetemplate) }}"
+
+- name: Debug merged_query_result
+  debug:
+    var: merged_query_result
     
 - name: Define Merged Query Result
   set_fact:
