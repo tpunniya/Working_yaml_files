@@ -107,7 +107,7 @@
       short_description: "{{ merged_query_result.sctask_data.short_description }}"
       state: "{{ merged_query_result.sctask_data.state }}"
       sys_id: "{{ merged_query_result.sctask_data.sys_id }}"
-      usecase_template: "{{ merged_query_result.query_result_usecasetemplate[0][0].playbookName | default('Unknown') }}"
+      usecase_template: "{{ merged_query_result.query_result_usecasetemplate.query_result[0][0].playbookName | default('Unknown') }}"
 
       
 - name: Debug Desired Output
