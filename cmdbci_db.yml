@@ -43,22 +43,32 @@
   #debug:
     #var: query_result1
 
-- name: Execute MySQL Query
+- name: Execute MySQL Query to fetch ci
   community.mysql.mysql_query:
     login_host: "{{ mysql_credentials.login_host }}"
     login_user: "{{ mysql_credentials.login_user }}"
     login_port: "{{ mysql_credentials.login_port }}"
     login_password: "{{ mysql_credentials.login_password }}"
     login_db: "{{ mysql_credentials.login_db }}"
-    query: SELECT * FROM `ci_details` where ci_name LIKE '{{ cmdb_ci }}';
+    query: SELECT * FROM `ci_details` where ci_name LIKE '{{ item.sctask_data.cmdb_ci_name | replace('*','')  }}';
   register: query_result_CI
-      
+
+- name: Execute MySQL Query-to fetch usecase template
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: SELECT * FROM `usecase_templatedetails` where ci_name LIKE '{{ item.sctask_data.short_description }}';
+  register: query_result_usecasetemplate
+  
 #- name: Debug Query Result
   #debug:
     #var: query_result_CI
 - name: Merge Query Results
   set_fact:
-    merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) }}"
+    merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) | combine(query_result_usecasetemplate) }}"
     
 - name: Define Merged Query Result
   set_fact:
@@ -82,6 +92,7 @@
       short_description: "{{ merged_query_result.sctask_data.short_description }}"
       state: "{{ merged_query_result.sctask_data.state }}"
       sys_id: "{{ merged_query_result.sctask_data.sys_id }}"
+      usecase_template: "{{ merged_query_result.query_result[0][0].usecaseName }}"
       
 - name: Debug Desired Output
   debug:
