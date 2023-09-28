@@ -60,7 +60,7 @@
     login_port: "{{ mysql_credentials.login_port }}"
     login_password: "{{ mysql_credentials.login_password }}"
     login_db: "{{ mysql_credentials.login_db }}"
-    query: SELECT * FROM `usecase_templatedetails` where ci_name LIKE '{{ item.sctask_data.short_description }}';
+    query: SELECT * FROM `usecase_templatedetails` where usecaseName LIKE '{{ item.sctask_data.short_description }}';
   register: query_result_usecasetemplate
   
 #- name: Debug Query Result
@@ -92,7 +92,7 @@
       short_description: "{{ merged_query_result.sctask_data.short_description }}"
       state: "{{ merged_query_result.sctask_data.state }}"
       sys_id: "{{ merged_query_result.sctask_data.sys_id }}"
-      usecase_template: "{{ merged_query_result.query_result[0][0].usecaseName }}"
+      usecase_template: "{{ merged_query_result.query_result[0][0].playbookName }}"
       
 - name: Debug Desired Output
   debug:
