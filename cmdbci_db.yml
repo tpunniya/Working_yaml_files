@@ -113,3 +113,8 @@
 - name: Debug Desired Output
   debug:
     var: desired_output
+
+- name: Change SC Task State
+  include_tasks: UsecaseTemplate_trigger.yml
+    vars:
+      desired_output: "{{ desired_output }}"
