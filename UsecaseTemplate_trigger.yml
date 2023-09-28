@@ -1,0 +1,17 @@
+---
+- name: Launch Ansible Tower Job Template
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Launch Job Template
+      awx.awx.job_launch:
+        tower_host: "35.154.24.128"
+        tower_username: "selvi"
+        tower_password: "selvi"
+        validate_certs: False 
+        job_template: "taskpoller_job"
+      register: job_launch_result
+
+    - name: Display Job Launch Result
+      debug:
+        var: job_launch_result
