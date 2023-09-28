@@ -1,0 +1,88 @@
+---
+- name: Execute MySQL Query
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: "SELECT OS FROM `ci_details` WHERE ci_name LIKE '{{ item.sctask_data.cmdb_ci_name | replace('*','')  }}'  ;" 
+  register: query_result
+
+- name: Debug Query Result
+  debug:
+    var: item.sctask_data.cmdb_ci_name
+    
+- name: Debug Query Result
+  debug:
+    var: query_result
+
+- name: Debug Query Result1
+  debug:
+     var: query_result.query_result[0][0].OS
+     
+- name: Extract Value from First Query Result (assuming it's in JSON format)
+  set_fact:
+    extracted_value: "{{ query_result.query_result[0][0].OS }}"
+     
+- name: Debug Extracted Value
+  debug:
+    var: extracted_value  # Replace 'os' with the actual key in your JSON object
+  
+- name: Execute MySQL Query
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: "SELECT * FROM `credId` where OS LIKE '{{ extracted_value }}';"
+  register: query_result1
+      
+#- name: Debug Query Result
+  #debug:
+    #var: query_result1
+
+- name: Execute MySQL Query
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: SELECT * FROM `ci_details` where ci_name LIKE '{{ cmdb_ci }}';
+  register: query_result_CI
+      
+#- name: Debug Query Result
+  #debug:
+    #var: query_result_CI
+- name: Merge Query Results
+  set_fact:
+    merged_query_result: "{{ item | combine(query_result) | combine(query_result_CI) }}"
+    
+- name: Define Merged Query Result
+  set_fact:
+    desired_output:
+      cat_item_value: "{{ merged_query_result.item_request_item_response.cat_item_value }}"
+      RITM: "{{ merged_query_result.item_request_item_response.RITM }}"
+      requestedfor_req: "{{ merged_query_result.item_request_response.requestedfor_req }}"
+      REQ: "{{ merged_query_result.item_request_response.REQ }}"
+      ci_name: "{{ merged_query_result.query_result[0][0].ci_name }}"
+      cmdb_ci_name: "{{ merged_query_result.sctask_data.cmdb_ci_name }}"
+      dns_domain: "{{ merged_query_result.query_result[0][0].dns_domain }}"
+      fqdn: "{{ merged_query_result.query_result[0][0].fqdn }}"
+      os: "{{ merged_query_result.query_result[0][0].os }}"
+      os_service_pack: "{{ merged_query_result.query_result[0][0].os_service_pack }}"
+      os_version: "{{ merged_query_result.query_result[0][0].os_version }}"
+      u_hrd_c_op_team: "{{ merged_query_result.query_result[0][0].u_hrd_c_op_team }}"
+      u_operational_model: "{{ merged_query_result.query_result[0][0].u_operational_model }}"
+      used_for: "{{ merged_query_result.query_result[0][0].used_for }}"
+      cmdb_ci: "{{ merged_query_result.sctask_data.cmdb_ci }}"
+      opened_at: "{{ merged_query_result.sctask_data.opened_at }}"
+      short_description: "{{ merged_query_result.sctask_data.short_description }}"
+      state: "{{ merged_query_result.sctask_data.state }}"
+      sys_id: "{{ merged_query_result.sctask_data.sys_id }}"
+      
+- name: Debug Desired Output
+  debug:
+    var: desired_output
