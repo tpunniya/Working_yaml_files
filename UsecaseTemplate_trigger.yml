@@ -6,6 +6,10 @@
     - name: Divide filtered_sctasks into sets of 10 items
       set_fact:
         task_sets: "{{ desired_output | batch(10) }}"
+
+    - name: Debug Desired Output
+      debug:
+        var: desired_output
         
     - name: Trigger job templates in parallel for each set
       block:
@@ -19,7 +23,7 @@
             tower_username: "selvi"
             tower_password: "selvi"
             validate_certs: False
-            job_template: "{{ item.template_name }}"
+            job_template: "{{ item.usecase_template }}"
             extra_vars:
               task_data: "{{ item | to_json }}"
           with_items: "{{ current_set }}"
