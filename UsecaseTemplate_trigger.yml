@@ -27,4 +27,4 @@
   with_items: "{{ current_set }}"
   loop_control:
     loop_var: item
-  when: current_set is iterable
+when: current_set is iterable
