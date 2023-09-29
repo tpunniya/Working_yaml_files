@@ -1,5 +1,7 @@
 ---
 - name: Launch Ansible Tower Job Templates Dynamically
+  hosts: localhost
+  gather_facts: false
   tasks:
     - name: Divide filtered_sctasks into sets of 10 items
       set_fact:
