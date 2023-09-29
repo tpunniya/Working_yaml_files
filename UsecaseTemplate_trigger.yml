@@ -1,32 +1,30 @@
 ---
-- name: Launch Ansible Tower Job Templates Dynamically
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - name: Divide filtered_sctasks into sets of 10 items
-      set_fact:
-        task_sets: "{{ desired_output | batch(10) }}"
+#- name: Launch Ansible Tower Job Templates Dynamically
+ # tasks:
+- name: Divide filtered_sctasks into sets of 10 items
+  set_fact:
+    task_sets: "{{ desired_output | batch(10) }}"
 
-    - name: Debug Desired Output
-      debug:
-        var: desired_output
-        
-    - name: Trigger job templates in parallel for each set
-      block:
-        - name: Display task details
-          ansible.builtin.debug:
-            var: current_set
+- name: Debug Desired Output
+  debug:
+    var: desired_output
+    
+- name: Trigger job templates in parallel for each set
+  block:
+    - name: Display task details
+      ansible.builtin.debug:
+        var: current_set
 
-    - name: Iterate over JSON objects in current_set and trigger job templates
-      awx.awx.job_launch:
-        tower_host: "35.154.24.128"
-        tower_username: "selvi"
-        tower_password: "selvi"
-        validate_certs: False
-        job_template: "{{ item.usecase_template }}"
-        extra_vars:
-          task_data: "{{ item | to_json }}"
-      with_items: "{{ current_set }}"
-      loop_control:
-        loop_var: item
-      when: current_set is iterable
+- name: Iterate over JSON objects in current_set and trigger job templates
+  awx.awx.job_launch:
+    tower_host: "35.154.24.128"
+    tower_username: "selvi"
+    tower_password: "selvi"
+    validate_certs: False
+    job_template: "{{ item.usecase_template }}"
+    extra_vars:
+      task_data: "{{ item | to_json }}"
+  with_items: "{{ current_set }}"
+  loop_control:
+    loop_var: item
+  when: current_set is iterable
