@@ -16,7 +16,7 @@
   tasks:
     - name: Get Snow Access Token
       uri:
-        url: "{{ snow_instance_url }}/oauth/token-request"
+        url: "{{ snow_instance_url }}//oauth_token.do"
         method: POST
         body:
           grant_type: client_credentials
@@ -25,6 +25,10 @@
         body_format: form-urlencoded
         return_content: yes
       register: snow_token_response
+
+    - name: Print response
+      debug:
+        var: snow_token_response.json.access_token
     
     - name: Extract Snow Access Token
       set_fact:
