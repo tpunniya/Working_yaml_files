@@ -16,20 +16,20 @@
   tasks:
     - name: Get Snow Access Token
       uri:
-	url: "{{ snow_instance_url }}/oauth/token-request"
-	method: POST
-	body:
-	grant_type: client_credentials
-	client_id: "{{ snow_client_id }}"
-	client_secret: "{{ snow_client_secret }}"
-	body_format: form-urlencoded
-	return_content: yes
+        url: "{{ snow_instance_url }}/oauth/token-request"
+        method: POST
+        body:
+          grant_type: client_credentials
+          client_id: "{{ snow_client_id }}"
+          client_secret: "{{ snow_client_secret }}"
+        body_format: form-urlencoded
+        return_content: yes
       register: snow_token_response
-	
+    
     - name: Extract Snow Access Token
       set_fact:
-	servicenow_token: "{{ snow_token_response.json.access_token }}"
-	
+        servicenow_token: "{{ snow_token_response.json.access_token }}"
+    
     - name: Fetch SC Task - Main
       block:
         - name: Fetch SC Task
