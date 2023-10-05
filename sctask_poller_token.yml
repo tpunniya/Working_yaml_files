@@ -15,16 +15,16 @@
 
   tasks:
     - name: Get Snow Access Token
-	uri:
-	   url: "{{ snow_instance_url }}/oauth/token-request"
-	   method: POST
-	   body:
-	   grant_type: client_credentials
-	   client_id: "{{ snow_client_id }}"
-	   client_secret: "{{ snow_client_secret }}"
-	   body_format: form-urlencoded
-	   return_content: yes
-	register: snow_token_response
+      uri:
+	url: "{{ snow_instance_url }}/oauth/token-request"
+	method: POST
+	body:
+	grant_type: client_credentials
+	client_id: "{{ snow_client_id }}"
+	client_secret: "{{ snow_client_secret }}"
+	body_format: form-urlencoded
+	return_content: yes
+      register: snow_token_response
 	
     - name: Extract Snow Access Token
       set_fact:
