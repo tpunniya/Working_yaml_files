@@ -1,19 +1,16 @@
 - name: Fetch SC Task Data from ServiceNow
   hosts: localhost
   gather_facts: no
-
   vars:
-
     snow_instance_url: "{{ snowurl_test }}"
     snow_user: "{{ snowuser_test }}"
     snow_password: "{{ snowpass_test }}"
-	snow_client_id: "{{ snowtest_client_id }}"
-	snow_client_secret: "{{ snowtest_client_secret }}"
-	db_hostname: "{{ db_host }}"
-	db_port: "{{ db_port }}"
-	db_user: "{{ db_username }}"
-	db_password: "{{ db_pass }}"
-	
+    snow_client_id: "{{ snowtest_client_id }}"
+    snow_client_secret: "{{ snowtest_client_secret }}"
+    db_hostname: "{{ db_host }}"
+    db_port: "{{ db_port }}"
+    db_user: "{{ db_username }}"
+    db_password: "{{ db_pass }}"
     entire_values: []  # Initialize empty list here to hold the API responses
 
   tasks:
