@@ -20,17 +20,17 @@
           debug:
             var: item
 
-        - name: Iterate over JSON objects in current_set and trigger job templates
-          awx.awx.job_launch:
-            tower_host: "35.154.24.128"  # Replace with your Tower host
-            tower_username: "selvi"  # Replace with your Tower username
-            tower_password: "selvi"  # Replace with your Tower password
-            validate_certs: False
-            job_template: "{{ item.usecase_template }}"
-            extra_vars:
-              task_data: "{{ item }}"
-          loop: "{{ current_set }}"
-          loop_control:
-            loop_var: item
-      when: current_set | default([]) | length > 0
+    - name: Iterate over JSON objects in current_set and trigger job templates
+      awx.awx.job_launch:
+        tower_host: "35.154.24.128"  # Replace with your Tower host
+        tower_username: "selvi"  # Replace with your Tower username
+        tower_password: "selvi"  # Replace with your Tower password
+        validate_certs: False
+        job_template: "{{ item.usecase_template }}"
+        extra_vars:
+          task_data: "{{ item }}"
+      loop: "{{ current_set }}"
+      loop_control:
+        loop_var: item
+  when: current_set | default([]) | length > 0
 
