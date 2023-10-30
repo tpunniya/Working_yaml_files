@@ -1,7 +1,7 @@
 ---
 - name: Launch Ansible Tower Job Templates Dynamically
-  hosts: localhost
-
+  
+  gather_facts: yes 
   
   tasks:
     - block:
