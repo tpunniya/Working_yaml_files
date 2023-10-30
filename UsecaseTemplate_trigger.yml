@@ -36,5 +36,5 @@
         loop: "{{ current_set }}"
         loop_control:
           loop_var: item
-    when: current_set | default([]) | length > 0
+        when: current_set | default([]) | length > 0
 
