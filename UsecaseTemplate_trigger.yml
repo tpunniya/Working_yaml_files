@@ -23,7 +23,22 @@
 - name: Debug current_set
   debug:
     var: item4
-  loop: "{{ task_sets }}"
+  loop: "{{ desired_output1 }}"
+  loop_control:
+    loop_var: item4
+
+- name: Debug current_set1
+  debug:
+    var: item4
+  loop: "{{ desired_output1 }}"
+  loop_control:
+    loop_var: item4
+    
+    
+- name: Debug current_set2
+  debug:
+    var: item4.usecase_template
+  loop: "{{ desired_output1 }}"
   loop_control:
     loop_var: item4
 
