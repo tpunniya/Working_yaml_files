@@ -20,17 +20,17 @@
   debug:
     var: desired_output1
 
-- name: Debug current_set
+- name: Debug current_set_checking
   debug:
     var: item4
-  loop: "{{ desired_output1 }}"
+  loop: "{{ desired_output1 | dict2items }}"
   loop_control:
     loop_var: item4
 
 - name: Debug current_set1
   debug:
-    var: item4
-  loop: "{{ desired_output1 }}"
+    var: item4.usecase_template.value
+  loop: "{{ desired_output1 | dict2items }}"
   loop_control:
     loop_var: item4
     
