@@ -1,15 +1,17 @@
 ---
+- name: Debug Desired Output
+  debug:
+    var: desired_output
+    
 - name: Launch Ansible Tower Job Templates Dynamically & Divide filtered_sctasks into sets of 10 items
   set_fact:
     task_sets: "{{ desired_output | batch(10) | list }}"
 
-- name: Debug Desired Output
-  debug:
-    var: desired_output
+
 
 - name: Debug current_set
   debug:
-    var: current_set
+    var: task_sets
 
        
 - name: Display item in the current set
