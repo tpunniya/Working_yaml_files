@@ -14,11 +14,11 @@
     
 - name: Launch Ansible Tower Job Templates Dynamically & Divide filtered_sctasks into sets of 10 items
   set_fact:
-    task_sets: "{{ desired_output1 | batch(20) | list }}"
+    task_sets: "{{ desired_output1 | batch(20) }}"
 
 - name: Debug current_set
   debug:
-    var: task_sets.usecase_template
+    var: task_sets
 
 - name: Iterate over JSON objects in current_set and trigger job templates
   awx.awx.job_launch:
