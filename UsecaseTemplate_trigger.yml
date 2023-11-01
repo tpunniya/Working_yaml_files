@@ -18,7 +18,7 @@
 
 - name: Debug current_set
   debug:
-    var: task_sets
+    var: desired_output1.usecase_template
 
 - name: Iterate over JSON objects in current_set and trigger job templates
   awx.awx.job_launch:
@@ -29,7 +29,7 @@
     job_template: "{{ item.usecase_template }}"
     extra_vars:
       task_data: "{{ item }}"
-  loop: "{{ task_sets }}"
+  loop: "{{ desired_output1 }}"
   loop_control:
     loop_var: item
   when: task_sets | default([]) | length > 0
