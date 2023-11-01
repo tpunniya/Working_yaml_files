@@ -2,6 +2,15 @@
 - name: Debug Desired Output
   debug:
     var: desired_output1
+
+- name: Debug specific variables from desired_output1
+  debug:
+    msg: "Variable: {{ item.key }}, Value: {{ item.value }}"
+  loop: "{{ desired_output1 | dict2items }}"
+
+  - name: Debug Desired Output-secondtime
+  debug:
+    var: desired_output1
     
 - name: Launch Ansible Tower Job Templates Dynamically & Divide filtered_sctasks into sets of 10 items
   set_fact:
