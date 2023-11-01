@@ -20,6 +20,13 @@
   debug:
     var: desired_output1
 
+- name: Debug current_set
+  debug:
+    var: item4
+  loop: "{{ task_sets }}"
+  loop_control:
+    loop_var: item4
+
 - name: Iterate over JSON objects in current_set and trigger job templates
   awx.awx.job_launch:
     tower_host: "35.154.24.128"  # Replace with your Tower host
@@ -29,9 +36,6 @@
     job_template: "{{ item3.usecase_template }}"
     extra_vars:
       task_data: "{{ item3 }}"
-  - name: Debug current_set
-    debug:
-      var: desired_output1
   loop: "{{ task_sets }}"
   loop_control:
     loop_var: item3
