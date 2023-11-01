@@ -11,6 +11,14 @@
 - name: Debug Desired Output-secondtime
   debug:
     var: desired_output1
+
+- name: Extract usecase_template value
+  set_fact:
+    usecase_template_value: "{{ desired_output1 | json_query('usecase_template') }}"
+
+- name: Debug usecase_template_value
+  debug:
+    var: usecase_template_value
     
 - name: Launch Ansible Tower Job Templates Dynamically & Divide filtered_sctasks into sets of 10 items
   set_fact:
