@@ -26,11 +26,11 @@
     tower_username: "selvi"  # Replace with your Tower username
     tower_password: "selvi"  # Replace with your Tower password
     validate_certs: False
-    job_template: "{{ item.usecase_template }}"
+    job_template: "{{ item3.usecase_template }}"
     extra_vars:
-      task_data: "{{ item }}"
+      task_data: "{{ item3 }}"
   loop: "{{ task_sets }}"
   loop_control:
-    loop_var: item
+    loop_var: item3
   when: task_sets | default([]) | length > 0
 
