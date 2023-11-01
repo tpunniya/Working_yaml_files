@@ -1,6 +1,5 @@
 ---
 - name: Launch Ansible Tower Job Templates Dynamically
-
   tasks:
     - block:
       - name: print username #pass the variables
