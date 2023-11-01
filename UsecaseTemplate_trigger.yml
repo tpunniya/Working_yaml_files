@@ -29,6 +29,9 @@
     job_template: "{{ item3.usecase_template }}"
     extra_vars:
       task_data: "{{ item3 }}"
+  - name: Debug current_set
+    debug:
+      var: desired_output1
   loop: "{{ task_sets }}"
   loop_control:
     loop_var: item3
