@@ -25,8 +25,8 @@
     tower_host: "35.154.24.128"  # Replace with your Tower host
     tower_username: "selvi"  # Replace with your Tower username
     tower_password: "selvi"  # Replace with your Tower password
-    validate_certs: False
-    job_template: "{{ item.desired_output1.usecase_template }}"
+    validate_certs: False  
+    job_template: "{{ task_data.usecase_template }}"
     extra_vars:
       task_data: "{{ item3 }}"
   loop: "{{ task_sets }}"
