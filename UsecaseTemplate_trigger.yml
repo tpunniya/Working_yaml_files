@@ -22,11 +22,14 @@
 
 - name: Extract usecase_template value1
   set_fact:
-    usecase_template_value1: "{{ desired_output1.usecase_template }}"
+    usecase_template_valuetest: "{{ item5 | selectattr('key', 'equalto', 'usecase_template') | map(attribute='value') | first }}"
+  loop: "{{ desired_output1 | dict2items }}"
+  loop_control:
+    loop_var: item5
 
-- name: Debug usecase_template_value1
+- name: Debug usecase_template_valuetest
   debug:
-    var: usecase_template_value1
+    var: usecase_template_valuetest
 
 
     
