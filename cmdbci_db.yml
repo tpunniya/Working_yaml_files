@@ -117,4 +117,4 @@
 - name: Trigger UsecaseTemplate
   include_tasks: UsecaseTemplate_trigger.yml
   vars:
-    desired_output: "{{ desired_output }}"
+    desired_output1: "{{ desired_output }}"
