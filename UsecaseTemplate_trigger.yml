@@ -1,5 +1,7 @@
 ---
 - name: Launch Ansible Tower Job Templates Dynamically
+  hosts: localhost
+  gather_facts: true
   tasks:
     - block:
       - name: print username #pass the variables
