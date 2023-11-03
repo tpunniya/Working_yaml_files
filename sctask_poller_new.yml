@@ -155,7 +155,7 @@
           include_tasks: cmdbci_db.yml
           vars:
             dbhost: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
-            cmdb_ci: "ANNIE-IBM"
+            #cmdb_ci: "ANNIE-IBM"
             mysql_credentials:
                 login_host: "{{ dbhost }}"
                 login_user: "admin"
@@ -163,9 +163,29 @@
                 login_password: "ansible123"
                 login_db: "taskdata"
             item: "{{ item1 }}"
+          register: task_final_output
 
       rescue:
         - name: Connect DB and get ci details
           debug:
             msg: "Error occurred while connecting db and fetching details"
+    
+    - name: Debug task_final_output
+      debug:
+        var: task_final_output
+  
+    - name: Merge JSON output
+      set_fact:
+        merged_output1: "{{ task_final_output.results | map(attribute='ansible_facts') | list }}"
+      when: task_final_output is defined
+
+    - name: Debug merged_output1
+      debug:
+        var: merged_output1
+
+    - name: Handle errors
+      set_fact:
+        error_message: "{{ error_output.msg }}"
+      when: error_output is defined
+
   
