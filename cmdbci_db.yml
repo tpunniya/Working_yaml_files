@@ -122,7 +122,7 @@
   set_fact:
     task_final_output : "{{ desired_output }}"
 
-#- name: Trigger UsecaseTemplate
-  #include_tasks: UsecaseTemplate_trigger.yml
-  #vars:
+- name: Trigger UsecaseTemplate
+  include_tasks: UsecaseTemplate_trigger.yml
+  vars:
     #desired_output1: "{{ desired_output }}"
