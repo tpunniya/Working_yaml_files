@@ -176,7 +176,7 @@
   
     - name: Merge JSON output
       set_fact:
-        merged_output1: "{{ task_final_output.results | map(attribute='ansible_facts') | list }}"
+        merged_output1: "{{ task_final_output | map(attribute='ansible_facts') | list }}"
       when: task_final_output is defined
 
     - name: Debug merged_output1
