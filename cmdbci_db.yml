@@ -109,9 +109,6 @@
       sys_id: "{{ merged_query_result.sctask_data.sys_id }}"
       usecase_template: "{{ merged_query_result.query_result_usecasetemplate.query_result[0][0].playbookName | default('Unknown') }}"
 
-- name: Set the desired_output variable combine
-  set_fact:
-    desired_output : "{{ desired_output + desired_output }}"
       
 - name: Debug Desired Output
   debug:
