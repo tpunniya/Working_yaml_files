@@ -174,14 +174,11 @@
       debug:
         var: task_final_output
   
-    - name: Merge JSON output
-      set_fact:
-        merged_output1: "{{ task_final_output | map(attribute='ansible_facts') | list }}"
-      when: task_final_output is defined
+    #- name: Merge JSON output
+      #set_fact:
+        #merged_output1: "{{ task_final_output | map(attribute='ansible_facts') | list }}"
+      #when: task_final_output is defined
 
-    - name: Debug merged_output1
-      debug:
-        var: merged_output1
 
     - name: Handle errors
       set_fact:
