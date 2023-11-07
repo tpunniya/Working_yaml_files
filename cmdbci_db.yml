@@ -114,10 +114,7 @@
   debug:
     var: desired_output
 
-- name: Add API responses to entire values
-  set_fact:
-    desired_output: "{{ desired_output + [{ desired_output }] }}"
-    
+   
 - name: Set the desired_output variable
   set_fact:
     task_final_output : "{{ desired_output }}"
