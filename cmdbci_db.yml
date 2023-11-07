@@ -116,7 +116,7 @@
     
 - name: Set the desired_output variable
   set_fact:
-    desired_output: "{{ task_final_output }}"
+    task_final_output : "{{ desired_output }}"
 
 #- name: Trigger UsecaseTemplate
   #include_tasks: UsecaseTemplate_trigger.yml
