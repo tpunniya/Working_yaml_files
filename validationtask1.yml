@@ -1,0 +1,23 @@
+---
+- name: Execute MySQL Query
+  community.mysql.mysql_query:
+    login_host: "{{ mysql_credentials.login_host }}"
+    login_user: "{{ mysql_credentials.login_user }}"
+    login_port: "{{ mysql_credentials.login_port }}"
+    login_password: "{{ mysql_credentials.login_password }}"
+    login_db: "{{ mysql_credentials.login_db }}"
+    query: SELECT * FROM `usecase_templatedetails` where usecaseName LIKE '{{ short_description }}';
+  register: query_result_usecaseName
+
+- name: Debug Query Result
+  debug:
+    var: query_result_usecaseName
+    
+- name: Debug Query Result
+  debug:
+    var: query_result
+
+- name: Debug Query Result1
+  debug:
+     var: query_result.query_result[0][0].Template
+     
