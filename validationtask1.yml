@@ -1,4 +1,19 @@
 ---
+- name: Extract word after /si/
+  hosts: localhost
+  gather_facts: false
+  vars:
+    Description: "{{ mysql_credentials.Description }}"
+
+  tasks:
+    - name: Extract word after /si/
+      set_fact:
+        extracted_word: "{{ Description.split('/si/')[1].split('/')[0] }}"
+
+    - name: Display result
+      debug:
+        var: extracted_word
+
 - name: Execute MySQL Query
   community.mysql.mysql_query:
     login_host: "{{ mysql_credentials.login_host }}"
