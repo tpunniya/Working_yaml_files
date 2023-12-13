@@ -1,5 +1,5 @@
 ---
-- name: Extract word after /si/
+- name: Extract word after /si/ and get usecase id details
   hosts: localhost
   gather_facts: yes
   vars:
