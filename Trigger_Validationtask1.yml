@@ -1,4 +1,4 @@
-- name: Fetch SC Task Data from ServiceNow
+- name: Fetch details from database
   hosts: localhost
   gather_facts: yes
   tasks:
