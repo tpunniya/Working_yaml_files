@@ -1,6 +1,6 @@
 - name: Fetch SC Task Data from ServiceNow
   hosts: localhost
-  gather_facts: yes
+  gather_facts: no
 - name: Connect DB and get ci details
   block:
     - name: Connect DB and get ci details
