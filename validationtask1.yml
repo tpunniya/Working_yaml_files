@@ -1,7 +1,7 @@
 ---
 - name: Extract word after /si/
   hosts: localhost
-  gather_facts: false
+  gather_facts: yes
   vars:
     Description: "{{ mysql_credentials.Description }}"
 
