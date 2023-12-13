@@ -13,8 +13,8 @@
             login_port: "3306"
             login_password: "ansible123"
             login_db: "taskdata"
-            short_description: ""
-            Description: ""
+            short_description: "HOSTING_PCLOUD_VM_START-STOP-RESTART"
+            Description: "cn/DXC TECHNOLOGY FRANCE/st/New/dv/EC/si/ABC/es/null/tc/COP ABC/tg/AC_HOSTING_CHGREQ_RG_ABC-SERVER-WINDOWS_L3/en/Sandbox/ty/change_task/mc/other/sc/other/lz/NGP"
       register: task_final_output
 
   rescue:
