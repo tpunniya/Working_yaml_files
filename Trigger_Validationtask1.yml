@@ -5,7 +5,7 @@
   - name: Connect DB and get ci details
     block:
       - name: Connect DB and get ci details
-        include_tasks: Trigger_Validationtask1.yml
+        include_tasks: validationtask1.yml
         vars:
           dbhost: "database-1.cpt56hhgq7lv.ap-south-1.rds.amazonaws.com"
           mysql_credentials:
