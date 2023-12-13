@@ -1,16 +1,11 @@
 ---
-- name: Extract word after /si/ and get usecase id details
-  vars:
-    Description: "{{ mysql_credentials.Description }}"
+- name: Extract word after /si/
+  set_fact:
+    extracted_word: "{{ mysql_credentials.Description.split('/si/')[1].split('/')[0] }}"
 
-  tasks:
-    - name: Extract word after /si/
-      set_fact:
-        extracted_word: "{{ Description.split('/si/')[1].split('/')[0] }}"
-
-    - name: Display result
-      debug:
-        var: extracted_word
+- name: Display result
+  debug:
+    var: extracted_word
 
 - name: Execute MySQL Query
   community.mysql.mysql_query:
