@@ -21,7 +21,7 @@
     login_port: "{{ mysql_credentials.login_port }}"
     login_password: "{{ mysql_credentials.login_password }}"
     login_db: "{{ mysql_credentials.login_db }}"
-    query: SELECT * FROM `usecase_templatedetails` where usecaseName LIKE '{{ short_description }}';
+    query: SELECT * FROM `templateID_details` where short_description LIKE '{{ short_description }}' AND site LIKE '{{ extracted_word }}';
   register: query_result_usecaseName
 
 - name: Debug Query Result
