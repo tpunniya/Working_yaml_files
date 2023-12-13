@@ -21,14 +21,15 @@
     login_db: "{{ mysql_credentials.login_db }}"
     query: SELECT * FROM `templateID_details` where short_description LIKE '{{ short_description }}' AND site LIKE '{{ extracted_word }}';
   register: query_result_usecaseName
-- name: Debug Query Result
+
+- name: Debug Query Result (UsecaseName)
   debug:
     var: query_result_usecaseName
-    
-- name: Debug Query Result
+
+- name: Debug Query Result (General)
   debug:
     var: query_result
+
 - name: Debug Query Result1
   debug:
     var: query_result.query_result[0][0].Template
-     
